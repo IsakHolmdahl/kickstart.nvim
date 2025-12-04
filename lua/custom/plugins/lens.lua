@@ -1,0 +1,3 @@
+return {
+  'isakholmdahl/lens.vim',
+}
