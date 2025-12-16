@@ -7,7 +7,27 @@ return {
     -- your configuration comes here
     -- or leave it empty to use the default settings
     animate = { enabled = true },
-    dashboard = { enabled = true },
+    dashboard = {
+      preset = {
+        header = [[
+__╱╲╲╲╲╲╲╲╲╲╲╲_____________________________________________        
+ _╲╱╱╱╱╱╲╲╲╱╱╱______________________________________________       
+  _____╲╱╲╲╲_________________________________________________      
+   _____╲╱╲╲╲______╱╲╲╲╲╲╲╲╲╲╲╲_____╱╲╲╲╲╲╲╲╲______╱╲╲╲╲╲╲╲╲__     
+    _____╲╱╲╲╲_____╲╱╱╱╱╱╱╱╲╲╲╱____╱╲╲╲╱╱╱╱╱╲╲╲___╱╲╲╲╱╱╱╱╱╲╲╲_    
+     _____╲╱╲╲╲__________╱╲╲╲╱_____╱╲╲╲╲╲╲╲╲╲╲╲___╱╲╲╲╲╲╲╲╲╲╲╲__   
+      _____╲╱╲╲╲________╱╲╲╲╱______╲╱╱╲╲╱╱╱╱╱╱╱___╲╱╱╲╲╱╱╱╱╱╱╱___  
+       __╱╲╲╲╲╲╲╲╲╲╲╲__╱╲╲╲╲╲╲╲╲╲╲╲__╲╱╱╲╲╲╲╲╲╲╲╲╲__╲╱╱╲╲╲╲╲╲╲╲╲╲_ 
+        _╲╱╱╱╱╱╱╱╱╱╱╱__╲╱╱╱╱╱╱╱╱╱╱╱____╲╱╱╱╱╱╱╱╱╱╱____╲╱╱╱╱╱╱╱╱╱╱__]],
+      },
+      sections = {
+        { section = 'header' },
+        { section = 'keys', gap = 1, padding = { 1, 0 } },
+        { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 2 },
+        { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 2 },
+        { section = 'startup' },
+      },
+    },
     explorer = {
       replace_netrw = true, -- Replace netrw with the snacks explorer
       trash = true, -- Use the system trash when deleting files
@@ -16,7 +36,20 @@ return {
     },
     indent = { enabled = true },
     input = { enabled = true },
-    picker = { enabled = true },
+    picker = {
+      win = {
+        list = {
+          wo = {
+            wrap = true,
+          },
+        },
+        preview = {
+          wo = {
+            wrap = true,
+          },
+        },
+      },
+    },
     notifier = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },
@@ -64,7 +97,7 @@ return {
         function()
           Snacks.picker.grep()
         end,
-        desc = 'Grep',
+        desc = 'CWD Grep',
       },
       {
         '<leader>:',
@@ -74,11 +107,11 @@ return {
         desc = 'Command History',
       },
       {
-        '<leader>n',
+        '<leader>sn',
         function()
           Snacks.picker.notifications()
         end,
-        desc = 'Notification History',
+        desc = '[n]otification History',
       },
       {
         '<leader>e',
@@ -89,46 +122,39 @@ return {
       },
       -- find
       {
-        '<leader>fb',
-        function()
-          Snacks.picker.buffers()
-        end,
-        desc = 'Buffers',
-      },
-      {
         '<leader>fc',
         function()
           Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
         end,
-        desc = 'Find Config File',
-      },
-      {
-        '<leader>ff',
-        function()
-          Snacks.picker.files()
-        end,
-        desc = 'Find Files',
-      },
-      {
-        '<leader>fg',
-        function()
-          Snacks.picker.git_files()
-        end,
-        desc = 'Find Git Files',
+        desc = 'Config File',
       },
       {
         '<leader>fp',
         function()
           Snacks.picker.projects()
         end,
-        desc = 'Projects',
+        desc = '[f]ind [p]rojects',
+      },
+      {
+        '<leader>ff',
+        function()
+          Snacks.picker.files()
+        end,
+        desc = '[f]ind [f]iles',
+      },
+      {
+        '<leader>fg',
+        function()
+          Snacks.picker.git_files()
+        end,
+        desc = '[f]ind [g]it files',
       },
       {
         '<leader>fr',
         function()
           Snacks.picker.recent()
         end,
-        desc = 'Recent',
+        desc = '[f]ind [r]ecent files',
       },
       -- git
       {
@@ -136,49 +162,49 @@ return {
         function()
           Snacks.picker.git_branches()
         end,
-        desc = 'Git Branches',
+        desc = '[g]it [b]ranches',
       },
       {
         '<leader>gl',
         function()
           Snacks.picker.git_log()
         end,
-        desc = 'Git Log',
+        desc = '[g]it [l]og',
       },
       {
         '<leader>gL',
         function()
           Snacks.picker.git_log_line()
         end,
-        desc = 'Git Log Line',
+        desc = '[g]it [L]og (current line)',
       },
       {
         '<leader>gs',
         function()
           Snacks.picker.git_status()
         end,
-        desc = 'Git Status',
+        desc = '[g]it [s]tatus',
       },
       {
         '<leader>gS',
         function()
           Snacks.picker.git_stash()
         end,
-        desc = 'Git Stash',
+        desc = '[g]it [S]tash',
       },
       {
         '<leader>gd',
         function()
           Snacks.picker.git_diff()
         end,
-        desc = 'Git Diff (Hunks)',
+        desc = '[g]it [d]iff (hunks)',
       },
       {
         '<leader>gf',
         function()
           Snacks.picker.git_log_file()
         end,
-        desc = 'Git Log File',
+        desc = '[g]it [f]ile [l]og',
       },
       -- gh
       {
@@ -193,7 +219,7 @@ return {
         function()
           Snacks.picker.gh_issue { state = 'all' }
         end,
-        desc = 'GitHub Issues (all)',
+        desc = '[g]itHub [I]ssues (all)',
       },
       {
         '<leader>gp',
@@ -225,13 +251,6 @@ return {
         desc = 'Grep Open Buffers',
       },
       {
-        '<leader>sg',
-        function()
-          Snacks.picker.grep()
-        end,
-        desc = 'Grep',
-      },
-      {
         '<leader>sw',
         function()
           Snacks.picker.grep_word()
@@ -252,7 +271,7 @@ return {
         function()
           Snacks.picker.search_history()
         end,
-        desc = 'Search History',
+        desc = 'History',
       },
       {
         '<leader>sa',
@@ -346,11 +365,11 @@ return {
         desc = 'Marks',
       },
       {
-        '<leader>sM',
+        '<leader>fM',
         function()
           Snacks.picker.man()
         end,
-        desc = 'Man Pages',
+        desc = '[f]ind [M]anual Page',
       },
       {
         '<leader>sp',
