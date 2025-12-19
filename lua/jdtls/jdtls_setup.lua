@@ -4,6 +4,11 @@
 -- Lombok jar should be placed at: ~/.local/share/nvim/lombok.jar
 -- This setup is intentional - jdtls needs specialized configuration
 -- that mason-lspconfig doesn't handle well.
+--
+--
+-- IMPORTANT: If things are not working, perhaps super not found or other, try creating nessecary eclipse files for the java project Run the following command in the root of your java project:
+--    mvn eclipse:eclipse
+--    This will generate the .project and .classpath files that jdtls uses to identify the project structure.
 local M = {}
 
 function M:setup()
@@ -25,7 +30,7 @@ function M:setup()
       '-data',
       workspace_dir,
     },
-    root_dir = vim.fs.root(0, { 'gradlew', '.git', 'mvnw', 'pom.xml' }),
+    root_dir = vim.fs.root(0, { '.classpath', '.project', 'gradlew', '.git', 'mvnw', 'pom.xml' }),
     -- CRITICAL: Maven monorepo configuration
     settings = {
       java = {

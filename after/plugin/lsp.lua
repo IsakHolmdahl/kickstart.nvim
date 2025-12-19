@@ -22,6 +22,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       -- Only set up document highlight if the server supports it
       if client:supports_method 'textDocument/documentHighlight' then
         local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
+
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
           buffer = event.buf,
           group = highlight_augroup,
@@ -34,11 +35,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
           callback = vim.lsp.buf.clear_references,
         })
       end
+
       vim.api.nvim_create_autocmd('LspDetach', {
-        group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+        buffer = event.buf, -- Add buffer scoping
+        group = highlight_augroup, -- Use same group
         callback = function(event2)
-          vim.lsp.buf.clear_references()
-          vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+          vim.lsp.buf.clear_references(event2.buf)
+          -- Clear only this buffer's autocmds from this group
+          vim.api.nvim_clear_autocmds { group = highlight_augroup, buffer = event2.buf }
         end,
       })
     end
