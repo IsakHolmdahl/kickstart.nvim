@@ -7,6 +7,7 @@ return {
     -- your configuration comes here
     -- or leave it empty to use the default settings
     animate = { enabled = true },
+    bigfile = { enabled = true },
     dashboard = {
       preset = {
         header = [[

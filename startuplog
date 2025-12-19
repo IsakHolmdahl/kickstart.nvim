@@ -1,0 +1,8 @@
+
+--- Autocommands ---
+--- Autocommands ---
+lualine  BufEnter
+    *         lua require'lualine.components.branch.git_branch'.find_git_dir()
+	Last set from ~/.local/share/nvim/lazy/lualine.nvim/lua/lualine/utils/utils.lua line 98
+--- Autocommands ---
+--- Autocommands ---
