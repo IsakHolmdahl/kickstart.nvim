@@ -25,6 +25,7 @@ function M:setup()
     name = 'jdtls',
     cmd = {
       'jdtls',
+      '--jvm-arg=-Declipse.java=21',
       '--jvm-arg=-javaagent:' .. lombok_jar,
       '--jvm-arg=-Xbootclasspath/a:' .. lombok_jar,
       '-data',

@@ -146,7 +146,7 @@ __╱╲╲╲╲╲╲╲╲╲╲╲__________________________________________
       {
         '<leader>fg',
         function()
-          Snacks.picker.git_files()
+          Snacks.picker.git_status()
         end,
         desc = '[f]ind [g]it files',
       },

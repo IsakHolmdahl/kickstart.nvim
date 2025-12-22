@@ -1,17 +1,6 @@
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
   callback = function(event)
-    local map = function(keys, func, desc, mode)
-      mode = mode or 'n'
-      vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-    end
-
-    map('grn', vim.lsp.buf.rename, '[r]e[n]ame')
-
-    map('gra', vim.lsp.buf.code_action, '[g]oto Code [a]ction', { 'n', 'x' })
-
-    map('grD', vim.lsp.buf.declaration, '[g]oto [D]eclaration')
-
     -- The following two autocommands are used to highlight references of the
     -- word under your cursor when your cursor rests there for a little while.
     --    See `:help CursorHold` for information about when this is executed
@@ -47,13 +36,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    -- The following code creates a keymap to toggle inlay hints in your
-    -- code, if the language server you are using supports them
-    --
-    -- This may be unwanted, since they displace some of your code
-    map('<leader>uth', function()
+    vim.keymap.set('n', '<leader>uth', function()
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-    end, '[t]oggle Inlay [h]ints')
+    end, { buffer = event.buf, desc = 'LSP: [t]oggle Inlay [h]ints' })
   end,
 })
 
