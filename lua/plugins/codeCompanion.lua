@@ -38,9 +38,9 @@ return {
           -- log_level = "DEBUG", -- or "TRACE"
         },
         prompt_library = {
-          ['sequential thinking'] = require 'custom.utils.llm.prompts.sequential_thinking',
-          ['research-and-implement'] = require 'custom.utils.llm.prompts.research_and_implement',
-          ['plan-and-code'] = require 'custom.utils.llm.prompts.plan_and_code',
+          ['sequential thinking'] = require 'utils.llm.prompts.sequential_thinking',
+          ['research-and-implement'] = require 'utils.llm.prompts.research_and_implement',
+          ['plan-and-code'] = require 'utils.llm.prompts.plan_and_code',
         },
         chat = {
           fold_reasoning = true,
@@ -54,7 +54,7 @@ return {
             adapter = 'copilot',
             model = 'claude-sonnet-4.5',
             opts = {
-              system_prompt = require 'custom.utils.llm.prompts.system_prompt',
+              system_prompt = require 'utils.llm.prompts.system_prompt',
             },
             tools = {
               opts = {
@@ -110,7 +110,7 @@ return {
       }
 
       pcall(function()
-        require('custom.utils.llm.patches.tool-input-logger').setup()
+        require('utils.llm.patches.tool-input-logger').setup()
       end)
     end,
   },

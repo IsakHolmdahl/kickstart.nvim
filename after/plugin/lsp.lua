@@ -42,12 +42,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'java',
-  callback = function(args)
-    require('jdtls.jdtls_setup'):setup()
-  end,
-})
+vim.cmd [[
+    augroup jdtls_lsp
+        autocmd!
+        autocmd FileType java lua require'config.jdtls'.setup_jdtls()
+    augroup end
+]]
 
 -- Make sure blink capabilities are available to all LSP servers
 if vim.fn.has 'nvim-0.11' == 1 then
