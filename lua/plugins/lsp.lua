@@ -28,6 +28,16 @@ return {
         },
       }
     end,
+  },
+  -- bridge mason and lspconfig to auto-setup servers
+  {
+    'williamboman/mason-lspconfig.nvim',
+    dependencies = { 'williamboman/mason.nvim', 'neovim/nvim-lspconfig' },
+    config = function()
+      require('mason-lspconfig').setup {
+        automatic_installation = true,
+      }
+    end,
   }, -- utility plugin for configuring the java language server for us
   {
     'mfussenegger/nvim-jdtls',
