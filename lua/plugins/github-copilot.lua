@@ -18,7 +18,6 @@ return {
     event = 'InsertEnter',
     config = function()
       require('copilot').setup {
-        -- turned off in favor of cmp
         -- suggestion = {
         --   enabled = true,
         --   auto_trigger = true,
@@ -37,9 +36,9 @@ return {
           auto_trigger = true,
           keymap = {
             -- Option + a
-            accept = 'å',
+            accept = '<M-a>',
             -- Option + w
-            accept_word = '∑',
+            accept_word = '<M-w>',
           },
         },
         nes = {

@@ -23,17 +23,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
           group = highlight_augroup,
           callback = vim.lsp.buf.clear_references,
         })
-      end
 
-      vim.api.nvim_create_autocmd('LspDetach', {
-        buffer = event.buf, -- Add buffer scoping
-        group = highlight_augroup, -- Use same group
-        callback = function(event2)
-          vim.lsp.buf.clear_references(event2.buf)
-          -- Clear only this buffer's autocmds from this group
-          vim.api.nvim_clear_autocmds { group = highlight_augroup, buffer = event2.buf }
-        end,
-      })
+        vim.api.nvim_create_autocmd('LspDetach', {
+          buffer = event.buf, -- Add buffer scoping
+          group = highlight_augroup, -- Use same group
+          callback = function(event2)
+            vim.lsp.buf.clear_references()
+            -- Clear only this buffer's autocmds from this group
+            vim.api.nvim_clear_autocmds { group = highlight_augroup, buffer = event2.buf }
+          end,
+        })
+      end
     end
 
     vim.keymap.set('n', '<leader>uth', function()

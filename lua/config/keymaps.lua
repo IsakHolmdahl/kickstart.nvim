@@ -3,10 +3,7 @@
 vim.keymap.set('i', 'ii', '<Esc>', { desc = 'Use ii to exit insert' })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Use Escape to exit terminal' })
 
-vim.keymap.set('n', '<leader>vt', [[<cmd>vsplit | term<cr>A]], { desc = 'Open terminal in vertical split' })
-vim.keymap.set('n', '<leader>ht', [[<cmd>split | term<cr>A]], { desc = 'Open terminal in horizontal split' })
-
-vim.keymap.set('n', '<C-L>', ':nohlsearch<CR>')
+vim.keymap.set('n', '<M-l>', ':nohlsearch<CR>')
 
 -- True delete (no yank)
 vim.keymap.set({ 'n', 'v' }, 'd', '"_d', { noremap = true, silent = true })
@@ -28,3 +25,5 @@ vim.keymap.set('n', 'gco', vim.lsp.buf.outgoing_calls, { desc = 'LSP: [g]o to [c
 
 -- Code action
 vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, { desc = 'LSP: Code [a]ction' })
+
+vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save File' })

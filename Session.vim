@@ -1,6 +1,13 @@
 let SessionLoad = 1
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 let v:this_session=expand("<sfile>:p")
+let Lf_StlColorscheme = "gruvbox_material"
+let VM_Insert_hl = "VMCursor"
+let Lf_PopupColorscheme = "gruvbox_material"
+let VM_Mono_hl = "VMCursor"
+let VM_Cursor_hl = "VMCursor"
+let VM_Extend_hl = "Visual"
+let Tabline_session_data = "[{\"show_all_buffers\": true, \"name\": \"1\", \"allowed_buffers\": []}]"
 silent only
 silent tabonly
 cd ~/.config/nvim
@@ -14,8 +21,19 @@ else
   set shortmess=aoO
 endif
 badd +80 health://
+badd +1 ~/.config/nvim/lua/plugins/smart-splits.lua
 argglobal
 %argdel
+edit ~/.config/nvim/lua/plugins/smart-splits.lua
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -23,8 +41,29 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
+wincmd =
+argglobal
+setlocal foldmethod=manual
+setlocal foldexpr=v:lua.vim.treesitter.foldexpr()
+setlocal foldmarker={{{,}}}
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldenable
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 1 - ((0 * winheight(0) + 51) / 102)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 1
+normal! 0
+wincmd w
 argglobal
 enew
+file \[CodeCompanion]\ 26
+balt ~/.config/nvim/lua/plugins/smart-splits.lua
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -33,6 +72,8 @@ setlocal foldlevel=0
 setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
+wincmd w
+wincmd =
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
