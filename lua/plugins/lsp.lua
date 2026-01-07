@@ -36,6 +36,11 @@ return {
     config = function()
       require('mason-lspconfig').setup {
         automatic_installation = true,
+        automatic_enable = {
+          exclude = {
+            'jdtls',
+          },
+        },
       }
     end,
   }, -- utility plugin for configuring the java language server for us
