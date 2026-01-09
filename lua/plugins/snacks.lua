@@ -38,15 +38,34 @@ __╱╲╲╲╲╲╲╲╲╲╲╲__________________________________________
     indent = { enabled = true },
     input = { enabled = true },
     picker = {
-      win = {
-        list = {
-          wo = {
-            wrap = true,
+      layout = {
+        reverse = true,
+        layout = {
+          box = 'horizontal',
+          backdrop = false,
+          width = 0.95,
+          height = 0.95,
+          border = 'none',
+          {
+            box = 'vertical',
+            { win = 'list', title = ' Results ', title_pos = 'center', border = true },
+            { win = 'input', height = 1, border = true, title = '{title} {live} {flags}', title_pos = 'center' },
+          },
+          {
+            win = 'preview',
+            title = '{preview:Preview}',
+            width = 0.65,
+            border = true,
+            title_pos = 'center',
           },
         },
-        preview = {
-          wo = {
-            wrap = true,
+      },
+      win = {
+        input = {
+          keys = {
+            ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
+            ['<C-h>'] = { 'toggle_hidden', mode = { 'i', 'n' } },
+            ['<C-i>'] = { 'toggle_ignored', mode = { 'i', 'n' } },
           },
         },
       },
@@ -112,7 +131,7 @@ __╱╲╲╲╲╲╲╲╲╲╲╲__________________________________________
         function()
           Snacks.picker.notifications()
         end,
-        desc = '[n]otification History',
+        desc = 'Notification History',
       },
       {
         '<leader>e',
@@ -134,28 +153,28 @@ __╱╲╲╲╲╲╲╲╲╲╲╲__________________________________________
         function()
           Snacks.picker.projects()
         end,
-        desc = '[f]ind [p]rojects',
+        desc = 'Find Projects',
       },
       {
         '<leader>ff',
         function()
           Snacks.picker.files()
         end,
-        desc = '[f]ind [f]iles',
+        desc = 'Find Files',
       },
       {
         '<leader>fg',
         function()
           Snacks.picker.git_status()
         end,
-        desc = '[f]ind [g]it files',
+        desc = 'Find Git Files',
       },
       {
         '<leader>fr',
         function()
           Snacks.picker.recent()
         end,
-        desc = '[f]ind [r]ecent files',
+        desc = 'Find Recent Files',
       },
       -- git
       {
@@ -163,14 +182,14 @@ __╱╲╲╲╲╲╲╲╲╲╲╲__________________________________________
         function()
           Snacks.picker.git_branches()
         end,
-        desc = '[g]it [b]ranches',
+        desc = 'Git Branches',
       },
       {
         '<leader>gl',
         function()
           Snacks.picker.git_log()
         end,
-        desc = '[g]it [l]og',
+        desc = 'Git Log',
       },
       {
         '<leader>gL',
@@ -409,32 +428,53 @@ __╱╲╲╲╲╲╲╲╲╲╲╲__________________________________________
       },
       -- LSP
       {
-        'gd',
+        'gre',
+        function()
+          Snacks.picker.lsp_references()
+        end,
+        desc = 'Goto References',
+      },
+      {
+        'grs',
+        function()
+          Snacks.picker.lsp_symbols()
+        end,
+        desc = 'Goto Document Symbols',
+      },
+      {
+        'grd',
         function()
           Snacks.picker.lsp_definitions()
         end,
         desc = 'Goto Definition',
       },
       {
-        'gD',
+        'grD',
         function()
           Snacks.picker.lsp_declarations()
         end,
         desc = 'Goto Declaration',
       },
       {
-        'gI',
+        'grI',
         function()
           Snacks.picker.lsp_implementations()
         end,
         desc = 'Goto Implementation',
       },
       {
-        'gy',
+        'gry',
         function()
           Snacks.picker.lsp_type_definitions()
         end,
-        desc = 'Goto T[y]pe Definition',
+        desc = 'Goto Type Definition',
+      },
+      {
+        'grt',
+        function()
+          Snacks.picker.lsp_type_definitions()
+        end,
+        desc = 'Goto Type Definition',
       },
       {
         'gai',
@@ -451,14 +491,7 @@ __╱╲╲╲╲╲╲╲╲╲╲╲__________________________________________
         desc = 'C[a]lls Outgoing',
       },
       {
-        '<leader>ss',
-        function()
-          Snacks.picker.lsp_symbols()
-        end,
-        desc = 'LSP Symbols',
-      },
-      {
-        '<leader>sS',
+        'grS',
         function()
           Snacks.picker.lsp_workspace_symbols()
         end,
