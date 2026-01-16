@@ -39,25 +39,9 @@ __╱╲╲╲╲╲╲╲╲╲╲╲__________________________________________
     input = { enabled = true },
     picker = {
       layout = {
-        reverse = true,
         layout = {
-          box = 'horizontal',
-          backdrop = false,
           width = 0.95,
           height = 0.95,
-          border = 'none',
-          {
-            box = 'vertical',
-            { win = 'list', title = ' Results ', title_pos = 'center', border = true },
-            { win = 'input', height = 1, border = true, title = '{title} {live} {flags}', title_pos = 'center' },
-          },
-          {
-            win = 'preview',
-            title = '{preview:Preview}',
-            width = 0.65,
-            border = true,
-            title_pos = 'center',
-          },
         },
       },
       win = {
@@ -65,7 +49,7 @@ __╱╲╲╲╲╲╲╲╲╲╲╲__________________________________________
           keys = {
             ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
             ['<C-h>'] = { 'toggle_hidden', mode = { 'i', 'n' } },
-            ['<C-i>'] = { 'toggle_ignored', mode = { 'i', 'n' } },
+            ['<C-i>'] = { 'toggle_hidden', mode = { 'i', 'n' } },
           },
         },
       },
@@ -78,7 +62,8 @@ __╱╲╲╲╲╲╲╲╲╲╲╲__________________________________________
     toggle = { enabled = true },
     words = { enabled = true },
     gh = { enabled = true },
-    lazygit = { enabled = true },
+    lazygit = { configure = true },
+    terminal = { enabled = true },
   },
   keys = function()
     return {
@@ -496,6 +481,20 @@ __╱╲╲╲╲╲╲╲╲╲╲╲__________________________________________
           Snacks.picker.lsp_workspace_symbols()
         end,
         desc = 'LSP Workspace Symbols',
+      },
+      {
+        '<leader>st',
+        function()
+          Snacks.picker.todo_comments()
+        end,
+        desc = 'Todo',
+      },
+      {
+        '<leader>sT',
+        function()
+          Snacks.picker.todo_comments { keywords = { 'TODO', 'FIX', 'FIXME' } }
+        end,
+        desc = 'Todo/Fix/Fixme',
       },
     }
   end,

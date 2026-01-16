@@ -7,7 +7,7 @@ return {
     file_types = { 'markdown', 'codecompanion', 'copilot-chat' },
     render_modes = { 'n', 'c', 't', 'i', 'v', 'V', '\22' },
     completions = { lsp = { enabled = true } },
-    -- anti_conceal = {
+    latex = { enabled = false },
     --   enabled = false,
     --   disabled_modes = false, -- { 'n', 'c', 't' },
     --   ignore = {

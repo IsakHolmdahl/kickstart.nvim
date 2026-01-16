@@ -26,8 +26,8 @@ return {
           debounce = 75,
           trigger_on_accept = true,
           keymap = {
-            accept = '<M-a>',
-            accept_word = '<M-w>',
+            accept = '<C-a>',
+            accept_word = '<C-s>',
             accept_line = false,
             next = '<M-]>',
             prev = '<M-[>',

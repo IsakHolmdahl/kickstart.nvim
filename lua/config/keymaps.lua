@@ -19,3 +19,8 @@ vim.keymap.set({ 'n', 'v' }, 'grl', vim.lsp.buf.code_action, { desc = 'Code Acti
 vim.keymap.set('n', 'grn', vim.lsp.buf.rename, { desc = 'Rename' })
 
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save File' })
+
+vim.keymap.set('n', 'L', ':bnext<CR>', { desc = 'Next Tab' })
+vim.keymap.set('n', 'H', ':bprevious<CR>', { desc = 'Previous Tab' })
+
+vim.keymap.set('n', '<Esc><Esc>', ':nohlsearch<CR>', { desc = 'Clear Search Highlighting' })

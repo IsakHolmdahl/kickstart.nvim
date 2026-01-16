@@ -80,7 +80,7 @@ return {
     },
     -- swapping buffers between windows
     {
-      '<leader>ch',
+      '<leader>ph',
       function()
         require('smart-splits').swap_buf_left()
       end,
@@ -88,7 +88,7 @@ return {
       mode = 'n',
     },
     {
-      '<leader>cj',
+      '<leader>pj',
       function()
         require('smart-splits').swap_buf_down()
       end,
@@ -96,7 +96,7 @@ return {
       mode = 'n',
     },
     {
-      '<leader>ck',
+      '<leader>pk',
       function()
         require('smart-splits').swap_buf_up()
       end,
@@ -104,7 +104,7 @@ return {
       mode = 'n',
     },
     {
-      '<leader>cl',
+      '<leader>pl',
       function()
         require('smart-splits').swap_buf_right()
       end,

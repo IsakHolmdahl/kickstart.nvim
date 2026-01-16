@@ -112,14 +112,6 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
--- Load the options from the config/options.lua file
-require 'config.options'
--- Load the keymaps from the config/keymaps.lua file
-require 'config.keymaps'
--- Load the auto commands from the config/autocmds.lua file
-require 'config.autocmds'
-
---
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
@@ -178,7 +170,7 @@ require('lazy').setup({
           require('conform').format { async = true, lsp_format = 'fallback' }
         end,
         mode = '',
-        desc = 'F[o]rmat buffer',
+        desc = 'Format buffer',
       },
     },
     opts = {
@@ -197,6 +189,11 @@ require('lazy').setup({
           }
         end
       end,
+      formatters = {
+        prettier = {
+          prepend_args = { '--prose-wrap', 'always', '--print-width', '80' }, -- Match linter
+        },
+      },
       formatters_by_ft = {
         lua = { 'stylua' },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
@@ -214,7 +211,6 @@ require('lazy').setup({
       },
     },
   },
-
   {
     'sainnhe/gruvbox-material',
     lazy = false,
@@ -250,3 +246,10 @@ require('lazy').setup({
     },
   },
 })
+
+-- Load the options from the config/options.lua file
+require 'config.options'
+-- Load the keymaps from the config/keymaps.lua file
+require 'config.keymaps'
+-- Load the auto commands from the config/autocmds.lua file
+require 'config.autocmds'
